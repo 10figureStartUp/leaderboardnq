@@ -1,0 +1,492 @@
+/* Modern CSS Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Variables */
+:root {
+  --bg-color: #0a0a0a;
+  --card-color: #121212;
+  --text-color: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --accent-color: #2563eb;
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+/* Update container size */
+.container {
+  width: 90%;
+  max-width: 1200px; /* Increase max-width for more spacious layout */
+  background-color: var(--card-color);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* Adjust spacing in header */
+.header {
+  padding: 2rem 2.5rem 1.5rem; /* Increased horizontal padding */
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 0 2.5rem; /* Increased horizontal margin */
+}
+
+/* Updated styles for the payout list items */
+.payout-list {
+  padding: 1.5rem 0;
+}
+
+.payout-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.payout-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.payout-number {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  width: 6rem;
+  margin-right: 0rem;
+}
+
+.payout-name {
+  font-size: 1.5rem;
+  font-weight: 500;
+  flex: 1;
+  /* Add spacing between name and balance */
+  margin-right: 12rem;
+}
+
+.payout-balance {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color);
+  text-align: right;
+  min-width: 120px; /* Ensure consistent width for balance column */
+}
+
+/* Hamburger Menu Icon */
+.menu-icon {
+  width: 30px;
+  height: 22px;
+  cursor: pointer;
+  position: relative;
+  z-index: 100;
+}
+
+.menu-icon span {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: white;
+  border-radius: 3px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+}
+
+.menu-icon span:nth-child(1) {
+  top: 0px;
+}
+
+.menu-icon span:nth-child(2),
+.menu-icon span:nth-child(3) {
+  top: 9px;
+}
+
+.menu-icon span:nth-child(4) {
+  top: 18px;
+}
+
+.menu-icon.open span:nth-child(1) {
+  top: 9px;
+  width: 0%;
+  left: 50%;
+}
+
+.menu-icon.open span:nth-child(2) {
+  transform: rotate(45deg);
+}
+
+.menu-icon.open span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+.menu-icon.open span:nth-child(4) {
+  top: 9px;
+  width: 0%;
+  left: 50%;
+}
+
+/* Notification dot */
+.notification-dot {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 10px;
+  height: 10px;
+  background-color: #ef4444;
+  border-radius: 50%;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.show {
+  display: flex;
+}
+
+.modal {
+  background-color: #1a1a1a;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.modal-header h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.form-submit {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.form-submit:hover {
+  background-color: #1d4ed8;
+}
+
+.pending-updates {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pending-item {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border-color);
+}
+
+.pending-info {
+  font-size: 1.25rem;
+}
+
+.pending-info .name {
+  font-weight: 600;
+}
+
+.pending-info .balance {
+  color: var(--text-secondary);
+  margin-left: 0.5rem;
+}
+
+.approve-btn {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.approve-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.no-updates {
+  text-align: center;
+  padding: 2rem 0;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+/* Menu dropdown */
+/* Menu dropdown */
+.menu-dropdown {
+  display: none;
+  position: absolute;
+  top: 65px;
+  right: 2.5rem;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  z-index: 90;
+  overflow: hidden;
+  width: 200px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+
+.menu-dropdown.show {
+  display: block;
+}
+
+.menu-item {
+  padding: 1rem 1.5rem;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 1rem;
+}
+
+.menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.menu-divider {
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+.menu-item.active {
+  color: var(--accent-color);
+}
+
+.menu-item.pending {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-item.pending .count {
+  background-color: #ef4444;
+  color: white;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-item.logout {
+  color: #ef4444;
+}
+
+.mod-badge {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  margin-right: 1rem;
+}
+
+/* Auth Form Styles */
+.auth-form {
+  padding: 0;
+}
+
+.auth-form p {
+  margin-top: 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.link {
+  color: var(--accent-color);
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 480px) {
+  .container {
+      border-radius: 12px;
+      margin: 0;
+      width: 100%;
+  }
+  
+  .header {
+      padding: 1.5rem 1.5rem 1rem;
+  }
+  
+  .header h1 {
+      font-size: 2rem;
+  }
+  
+  .divider {
+      margin: 0 1.5rem;
+  }
+  
+  .payout-item {
+      padding: 0.75rem 1.5rem;
+  }
+  
+  .payout-number {
+      width: 2rem;
+      font-size: 1rem;
+  }
+  
+  .payout-name {
+      font-size: 1.25rem;
+  }
+  
+  .payout-balance {
+      font-size: 1.1rem;
+  }
+  
+  .modal {
+      padding: 1.5rem;
+      width: 95%;
+  }
+  
+  .menu-dropdown {
+      right: 1.5rem;
+      width: 180px;
+  }
+
+  .no-users {
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .no-users p {
+    font-size: 1.2rem;
+  }
+  
+  .payout-list {
+    min-height: 200px;
+  }
+}
+
