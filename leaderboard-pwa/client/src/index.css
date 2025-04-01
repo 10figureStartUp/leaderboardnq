@@ -7,7 +7,7 @@
 
 /* Variables */
 :root {
-  --bg-color: #0a0a0a;
+  --bg-color: #000000;
   --card-color: #121212;
   --text-color: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.8);
@@ -22,6 +22,10 @@ html, body {
   overflow-x: hidden;
 }
 
+html {
+  font-size: 18px; /* Increase base font size for larger text */
+}
+
 body {
   font-family: var(--font-family);
   background-color: var(--bg-color);
@@ -30,13 +34,15 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 1rem;
+  padding: 0;
 }
 
-/* Update container size */
+/* Updated container styles */
 .container {
-  width: 90%;
-  max-width: 1200px; /* Increase max-width for more spacious layout */
+  width: 95%;
+  max-width: none;       /* Remove the width cap so it can stretch */
+  min-width: 90vw;        /* Ensure the container is at least 90% of the viewport width */
+  margin: 0 auto;         /* Center the container */
   background-color: var(--card-color);
   border-radius: 16px;
   overflow: hidden;
@@ -44,9 +50,16 @@ body {
   position: relative;
 }
 
-/* Adjust spacing in header */
+/* For smaller screens (e.g. iPhone) you can further enforce 90% width */
+@media (max-width: 480px) {
+  .container {
+    width: 90%;
+  }
+}
+
+/* Header & Divider */
 .header {
-  padding: 2rem 2.5rem 1.5rem; /* Increased horizontal padding */
+  padding: 2rem 2.5rem 1.5rem;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -54,7 +67,7 @@ body {
 }
 
 .header h1 {
-  font-size: 2.5rem;
+  font-size: 3rem; /* Bigger header text */
   font-weight: 700;
   letter-spacing: -0.01em;
   margin: 0;
@@ -68,48 +81,54 @@ body {
 .divider {
   height: 1px;
   background-color: var(--border-color);
-  margin: 0 2.5rem; /* Increased horizontal margin */
+  margin: 0 2.5rem;
 }
 
-/* Updated styles for the payout list items */
+/* Payout list styles using CSS Grid for perfect alignment */
 .payout-list {
   padding: 1.5rem 0;
 }
 
 .payout-item {
-  display: flex;
+  display: grid;
+  /* Reduced the width for ranking number to 3rem to tighten the gap */
+  grid-template-columns: 2rem 1fr 120px; /* 3rem for ranking number, 1fr for name, 120px for balance */
   align-items: center;
   padding: 1rem 2rem;
   transition: background-color 0.2s ease;
   cursor: pointer;
+  /* Optional: You can add a small column gap if desired */
+  /* column-gap: 0.5rem; */
 }
 
 .payout-item:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
+/* Ranking number with monospaced font for perfect alignment */
 .payout-number {
   font-size: 1.25rem;
   font-weight: 500;
   color: var(--text-secondary);
-  width: 6rem;
-  margin-right: 0rem;
+  text-align: left;
+  font-family: 'Courier New', Courier, monospace;
 }
 
+/* Payout name (fixed to left) */
 .payout-name {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 500;
-  flex: 1;
-  /* Add spacing between name and balance */
-  margin-right: 12rem;
+  /* Remove or reduce margin-right if not needed */
+  margin-right: 0.5rem;
+  text-align: left;
 }
 
+/* Payout balance */
 .payout-balance {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: var(--text-color);
   text-align: right;
-  min-width: 120px; /* Ensure consistent width for balance column */
 }
 
 /* Hamburger Menu Icon */
@@ -131,7 +150,7 @@ body {
   opacity: 1;
   left: 0;
   transform: rotate(0deg);
-  transition: .25s ease-in-out;
+  transition: 0.25s ease-in-out;
 }
 
 .menu-icon span:nth-child(1) {
@@ -329,7 +348,6 @@ body {
 }
 
 /* Menu dropdown */
-/* Menu dropdown */
 .menu-dropdown {
   display: none;
   position: absolute;
@@ -425,49 +443,42 @@ body {
 
 /* Mobile Responsive Adjustments */
 @media (max-width: 480px) {
-  .container {
-      border-radius: 12px;
-      margin: 0;
-      width: 100%;
-  }
-  
   .header {
-      padding: 1.5rem 1.5rem 1rem;
+    padding: 1.5rem 1.5rem 1rem;
   }
   
   .header h1 {
-      font-size: 2rem;
+    font-size: 2rem;
   }
   
   .divider {
-      margin: 0 1.5rem;
+    margin: 0 1.5rem;
   }
   
   .payout-item {
-      padding: 0.75rem 1.5rem;
+    padding: 0.75rem 1.5rem;
   }
   
   .payout-number {
-      width: 2rem;
-      font-size: 1rem;
+    font-size: 1.25rem;
   }
   
   .payout-name {
-      font-size: 1.25rem;
+    font-size: 1.25rem;
   }
   
   .payout-balance {
-      font-size: 1.1rem;
+    font-size: 1.1rem;
   }
   
   .modal {
-      padding: 1.5rem;
-      width: 95%;
+    padding: 1.5rem;
+    width: 95%;
   }
   
   .menu-dropdown {
-      right: 1.5rem;
-      width: 180px;
+    right: 1.5rem;
+    width: 180px;
   }
 
   .no-users {
@@ -490,3 +501,49 @@ body {
   }
 }
 
+/* Additional root styles */
+#root {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
